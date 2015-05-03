@@ -9,7 +9,7 @@ Logger_warning_color='\033[1;35m'
 
 # Configurable
 Logger__prefix='Logger'
-Logger__has_prefix=1
+Logger_has_prefix=1
 
 #################################################
 # Logs a message
@@ -32,7 +32,7 @@ Logger_log() {
     fi
 
     # Logging
-    if [ $Logger__has_prefix -eq 1 ]; then
+    if [ $Logger_has_prefix -eq 1 ]; then
         echo $flags"<< $Logger__prefix >>: $1"
     else
         echo $flags"$1"
@@ -101,4 +101,18 @@ Logger__alert() {
 #################################################
 Logger__prompt() {
     Logger__alert "$1" -n
+}
+
+#################################################
+# Enables the prefix before all logs
+#################################################
+Logger__enable_prefix() {
+    Logger_has_prefix=1
+}
+
+#################################################
+# Disables the prefix before all logs
+#################################################
+Logger__disable_prefix() {
+    Logger_has_prefix=0
 }
