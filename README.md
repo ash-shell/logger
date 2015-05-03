@@ -6,7 +6,7 @@ Ash-Logger is an [Ash](https://github.com/BrandonRomano/ash) module that offers 
 
 ### Ash Users
 
-TBD
+Ash-Logger is part of the Ash core, so you can just start using it in your Ash modules.
 
 ### Non Ash Users
 
@@ -39,11 +39,17 @@ Logger__prompt "Prompts: "; read variable
 
 # Success
 Logger__success "Success: $variable"
+
+# Prefix Switch
+Logger__disable_prefix
+Logger__warning "No Prefix"
+Logger__enable_prefix
+Logger__success "Prefix"
 ```
 
 Outputs:
 
-![Imgur](http://i.imgur.com/G0OOkrp.png?1)
+![Imgur](http://i.imgur.com/lGBwpaa.png?1)
 
 ## License
 
