@@ -1,6 +1,6 @@
-# Ash-Logger
+# Logger
 
-Ash-Logger is an [Ash](https://github.com/BrandonRomano/ash) module that offers sensible logging in Bash.
+Logger is an [Ash](https://github.com/ash-shell/ash) module that offers sensible logging in Bash.
 
 ## Getting started
 
