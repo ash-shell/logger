@@ -1,4 +1,3 @@
-name: logger
-version: 1.0.0
-author: Brandon Romano
-license: MIT
+name: Logger
+package: github.com/ash-shell/logger
+default_alias: logger
