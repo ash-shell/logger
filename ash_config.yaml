@@ -1,3 +1,2 @@
-name: Logger
+name: logger
 package: github.com/ash-shell/logger
-default_alias: logger
