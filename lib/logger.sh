@@ -7,9 +7,9 @@ Logger_success_color='\033[0;32m'
 Logger_alert_color='\033[1;34m'
 Logger_warning_color='\033[1;35m'
 
-# Configurable
-Logger__prefix='Logger'
-Logger_has_prefix=1
+# Vars
+Logger_prefix='Logger'
+Logger_has_prefix="$Ash__true"
 
 #################################################
 # Logs a message
@@ -19,27 +19,25 @@ Logger_has_prefix=1
 # @param $3: Any flags to add to the main echo
 #################################################
 Logger_log() {
-    local flags=''
-
-    # Checking for any flags
-    if [ ! -z "$3" ]; then
-        flags="$3 "
-    fi
+    # Params
+    local message="$1"
+    local color="$2"
+    local flags="$3"
 
     # Setting color (if param is passed)
-    if [ ! -z "$2" ]; then
-        echo -ne "$2"
+    if [ ! -z "$color" ]; then
+        echo -ne "$color"
     fi
 
     # Logging
-    if [ $Logger_has_prefix -eq 1 ]; then
-        echo $flags"<< $Logger__prefix >>: $1"
+    if [ "$Logger_has_prefix" = "$Ash__true" ]; then
+        echo $flags "<< $Logger_prefix >>: $message"
     else
-        echo $flags"$1"
+        echo $flags "$message"
     fi
 
     # Disabling color (if param is passed)
-    if [ ! -z "$2" ]; then
+    if [ ! -z "$color" ]; then
         echo -ne "$Logger_standard_color"
     fi
 }
@@ -51,7 +49,12 @@ Logger_log() {
 # @param $2: Any echo flags
 #################################################
 Logger__log() {
-    Logger_log "$1" "$Logger_standard_color" "$2"
+    # Params
+    local message="$1"
+    local flags="$2"
+
+    # Logging
+    Logger_log "$message" "$Logger_standard_color" "$flags"
 }
 
 #################################################
@@ -61,7 +64,12 @@ Logger__log() {
 # @param $2: Any echo flags
 #################################################
 Logger__warning() {
-    Logger_log "$1" "$Logger_warning_color" "$2"
+    # Params
+    local message="$1"
+    local flags="$2"
+
+    # Logging
+    Logger_log "$message" "$Logger_warning_color" "$flags"
 }
 
 #################################################
@@ -71,7 +79,12 @@ Logger__warning() {
 # @param $2: Any echo flags
 #################################################
 Logger__error() {
-    Logger_log "$1" "$Logger_error_color" "$2"
+    # Params
+    local message="$1"
+    local flags="$2"
+
+    # Logging
+    Logger_log "$message" "$Logger_error_color" "$flags"
 }
 
 #################################################
@@ -81,7 +94,12 @@ Logger__error() {
 # @param $2: Any echo flags
 #################################################
 Logger__success() {
-    Logger_log "$1" "$Logger_success_color" "$2"
+    # Params
+    local message="$1"
+    local flags="$2"
+
+    # Logging
+    Logger_log "$message" "$Logger_success_color" "$flags"
 }
 
 #################################################
@@ -91,7 +109,12 @@ Logger__success() {
 # @param $2: Any echo flags
 #################################################
 Logger__alert() {
-    Logger_log "$1" "$Logger_alert_color" "$2"
+    # Params
+    local message="$1"
+    local flags="$2"
+
+    # Logging
+    Logger_log "$message" "$Logger_alert_color" "$flags"
 }
 
 #################################################
@@ -100,19 +123,36 @@ Logger__alert() {
 # @param $1: The message to log
 #################################################
 Logger__prompt() {
-    Logger__alert "$1" -n
+    # Params
+    local message="$1"
+
+    # Logging
+    Logger__alert "$message" -n
+}
+
+#################################################
+# Sets the logger prefix
+#
+# @param $1: The new prefix
+#################################################
+Logger__set_prefix() {
+    # Params
+    local prefix="$1"
+
+    # Logging
+    Logger_prefix="$prefix"
 }
 
 #################################################
 # Enables the prefix before all logs
 #################################################
 Logger__enable_prefix() {
-    Logger_has_prefix=1
+    Logger_has_prefix="$Ash__true"
 }
 
 #################################################
 # Disables the prefix before all logs
 #################################################
 Logger__disable_prefix() {
-    Logger_has_prefix=0
+    Logger_has_prefix="$Ash__false"
 }
