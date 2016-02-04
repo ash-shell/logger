@@ -39,6 +39,22 @@ Outputs:
 
 ![Imgur](http://i.imgur.com/lGBwpaa.png?1)
 
+### Logging to a file
+
+Logger supports logging to a file by using `Logger__log`.  You can specify the file to log to in your [~/.ashrc file](https://github.com/ash-shell/ash#the-ashrc-file) with the variable `LOGGER_OUTPUT_FILE`.
+
+In your `~/.ashrc` file:
+
+```bash
+export LOGGER_OUTPUT_FILE="/Users/brandon/desktop/ashlogs.log"
+```
+
+In code:
+
+```
+Logger__debug "Hello World!"
+```
+
 ## License
 
 [MIT](license.txt)
