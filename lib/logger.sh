@@ -131,6 +131,31 @@ Logger__prompt() {
 }
 
 #################################################
+# Logs to a file, as specified in the ~/.ashrc
+# file with the value LOGGER_OUTPUT_FILE
+#
+# @param $1: The message to log
+#################################################
+Logger__debug() {
+    # Params
+    local message="$1"
+
+    # Checking if LOGGER_OUTPUT_FILE is set
+    if [[ ! -f "$LOGGER_OUTPUT_FILE" ]]; then
+        Logger__error "Could not use debug log as the LOGGER_OUTPUT_FILE is not set in the ~/.ashrc file"
+        Logger__log "$message"
+        return
+    fi
+
+    # Logging to file
+    if [ "$Logger_has_prefix" = "$Ash__true" ]; then
+        echo "<< $Logger_prefix >>: $message" >> "$LOGGER_OUTPUT_FILE"
+    else
+        echo "$message" >> "$LOGGER_OUTPUT_FILE"
+    fi
+}
+
+#################################################
 # Sets the logger prefix
 #
 # @param $1: The new prefix
