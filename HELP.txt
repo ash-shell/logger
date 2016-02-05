@@ -1,0 +1,8 @@
+Usage:
+
+    logger:clear
+        Clears the debug log file of all contents.
+
+    logger:watch
+        Watches the debug log file for any changes, and outputs
+        them to stdout.

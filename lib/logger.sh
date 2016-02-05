@@ -1,13 +1,18 @@
 #!/bin/bash
 
-# Constant
+# ===== Constants =====
+# Colors
 Logger_standard_color='\033[1;0m'
 Logger_error_color='\033[1;31m'
 Logger_success_color='\033[0;32m'
 Logger_alert_color='\033[1;34m'
 Logger_warning_color='\033[1;35m'
 
-# Vars
+# Files
+Logger_package="github.com/ash-shell/logger"
+Logger_default_debug_file="$Ash__source_directory/$Ash__core_modules_directory/$Logger_package/extras/logger.log"
+
+# ===== Vars =====
 Logger_prefix='Logger'
 Logger_has_prefix="$Ash__true"
 
@@ -39,6 +44,19 @@ Logger_log() {
     # Disabling color (if param is passed)
     if [ ! -z "$color" ]; then
         echo -ne "$Logger_standard_color"
+    fi
+}
+
+#################################################
+# Returns the appropriate location of our debug
+# file.  To set a custom location, set
+# LOGGER_DEBUG_FILE in your ~/.ashrc file
+#################################################
+Logger_get_debug_file() {
+    if [[ ! -z "$LOGGER_DEBUG_FILE" ]]; then
+        echo "$LOGGER_DEBUG_FILE"
+    else
+        echo "$Logger_default_debug_file"
     fi
 }
 
@@ -131,8 +149,8 @@ Logger__prompt() {
 }
 
 #################################################
-# Logs to a file, as specified in the ~/.ashrc
-# file with the value LOGGER_OUTPUT_FILE
+# Logs to a file, as determined by the
+# Logger_get_debug_file function
 #
 # @param $1: The message to log
 #################################################
@@ -140,18 +158,20 @@ Logger__debug() {
     # Params
     local message="$1"
 
-    # Checking if LOGGER_OUTPUT_FILE is set
-    if [[ ! -f "$LOGGER_OUTPUT_FILE" ]]; then
-        Logger__error "Could not use debug log as the LOGGER_OUTPUT_FILE is not set in the ~/.ashrc file"
-        Logger__log "$message"
-        return
-    fi
+    # Determining debug file
+    local debug_file=$(Logger_get_debug_file)
 
     # Logging to file
+    local err=""
     if [ "$Logger_has_prefix" = "$Ash__true" ]; then
-        echo "<< $Logger_prefix >>: $message" >> "$LOGGER_OUTPUT_FILE"
+        err=$({ echo "<< $Logger_prefix >>: $message" >> "$debug_file"; } 2>&1)
     else
-        echo "$message" >> "$LOGGER_OUTPUT_FILE"
+        err=$({ echo "$message" >> "$debug_file"; } 2>&1)
+    fi
+
+    # Checking for errors
+    if [[ "$err" != "" ]]; then
+        Logger__error "Unable to log to $debug_file: Permission denied"
     fi
 }
 
