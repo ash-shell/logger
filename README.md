@@ -39,20 +39,28 @@ Outputs:
 
 ![Imgur](http://i.imgur.com/lGBwpaa.png?1)
 
-### Logging to a file
+## Logging to a file
 
-Logger supports logging to a file by using `Logger__log`.  You can specify the file to log to in your [~/.ashrc file](https://github.com/ash-shell/ash#the-ashrc-file) with the variable `LOGGER_OUTPUT_FILE`.
+Logger supports logging to a file by using `Logger__debug`.
 
-In your `~/.ashrc` file:
+> `Logger__debug` is particularly useful testing things out when in subshells, as you can't normally capture the output in your terminal.
 
-```bash
-export LOGGER_OUTPUT_FILE="/Users/brandon/desktop/ashlogs.log"
+There's already a default file set up for you so you can immediately start using `Logger__debug`, but you can specify the file to log to in your [~/.ashrc file](https://github.com/ash-shell/ash#the-ashrc-file) with the variable `LOGGER_DEBUG_FILE`.
+
+#### logger:watch
+
+To watch the logger file:
+
+```
+ash logger:watch
 ```
 
-In code:
+#### logger:clear
+
+To clear the logger file of its contents:
 
 ```
-Logger__debug "Hello World!"
+ash logger:clear
 ```
 
 ## License
