@@ -2,15 +2,15 @@
 
 # ===== Constants =====
 # Colors
-Logger_standard_color='\033[1;0m'
-Logger_error_color='\033[1;31m'
-Logger_success_color='\033[0;32m'
-Logger_alert_color='\033[1;34m'
-Logger_warning_color='\033[1;35m'
+Logger_STANDARD_COLOR='\033[1;0m'
+Logger_ERROR_COLOR='\033[1;31m'
+Logger_SUCCESS_COLOR='\033[0;32m'
+Logger_ALERT_COLOR='\033[1;34m'
+Logger_WARNING_COLOR='\033[1;35m'
 
 # Files
-Logger_package="github.com/ash-shell/logger"
-Logger_default_debug_file="$Ash__source_directory/$Ash__core_modules_directory/$Logger_package/extras/logger.log"
+Logger_PACKAGE="github.com/ash-shell/logger"
+Logger_DEFAULT_DEBUG_FILE="$Ash__source_directory/$Ash__core_modules_directory/$Logger_PACKAGE/extras/logger.log"
 
 # ===== Vars =====
 Logger_prefix='Logger'
@@ -43,7 +43,7 @@ Logger_log() {
 
     # Disabling color (if param is passed)
     if [ ! -z "$color" ]; then
-        echo -ne "$Logger_standard_color"
+        echo -ne "$Logger_STANDARD_COLOR"
     fi
 }
 
@@ -56,7 +56,7 @@ Logger_get_debug_file() {
     if [[ ! -z "$LOGGER_DEBUG_FILE" ]]; then
         echo "$LOGGER_DEBUG_FILE"
     else
-        echo "$Logger_default_debug_file"
+        echo "$Logger_DEFAULT_DEBUG_FILE"
     fi
 }
 
@@ -72,7 +72,7 @@ Logger__log() {
     local flags="$2"
 
     # Logging
-    Logger_log "$message" "$Logger_standard_color" "$flags"
+    Logger_log "$message" "$Logger_STANDARD_COLOR" "$flags"
 }
 
 #################################################
@@ -87,7 +87,7 @@ Logger__warning() {
     local flags="$2"
 
     # Logging
-    Logger_log "$message" "$Logger_warning_color" "$flags"
+    Logger_log "$message" "$Logger_WARNING_COLOR" "$flags"
 }
 
 #################################################
@@ -102,7 +102,7 @@ Logger__error() {
     local flags="$2"
 
     # Logging
-    Logger_log "$message" "$Logger_error_color" "$flags"
+    Logger_log "$message" "$Logger_ERROR_COLOR" "$flags"
 }
 
 #################################################
@@ -117,7 +117,7 @@ Logger__success() {
     local flags="$2"
 
     # Logging
-    Logger_log "$message" "$Logger_success_color" "$flags"
+    Logger_log "$message" "$Logger_SUCCESS_COLOR" "$flags"
 }
 
 #################################################
@@ -132,7 +132,7 @@ Logger__alert() {
     local flags="$2"
 
     # Logging
-    Logger_log "$message" "$Logger_alert_color" "$flags"
+    Logger_log "$message" "$Logger_ALERT_COLOR" "$flags"
 }
 
 #################################################
