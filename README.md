@@ -4,7 +4,7 @@ Logger is an [Ash](https://github.com/ash-shell/ash) module that offers sensible
 
 ## Getting started
 
-Ash-Logger is part of the Ash core, so you can just start using it in your Ash modules.
+Logger is part of the Ash core, so you can just start using it in your Ash modules.
 
 ## Example Usage
 
