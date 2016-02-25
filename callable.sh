@@ -12,7 +12,7 @@ Logger__callable_main() {
 # this module
 ##################################################
 Logger__callable_help() {
-    more "$Ash__active_module_directory/HELP.txt"
+    more "$Ash__ACTIVE_MODULE_DIRECTORY/HELP.txt"
 }
 
 ##################################################

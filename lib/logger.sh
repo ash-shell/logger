@@ -10,11 +10,11 @@ Logger_WARNING_COLOR='\033[1;35m'
 
 # Files
 Logger_PACKAGE="github.com/ash-shell/logger"
-Logger_DEFAULT_DEBUG_FILE="$Ash__source_directory/$Ash__core_modules_directory/$Logger_PACKAGE/extras/logger.log"
+Logger_DEFAULT_DEBUG_FILE="$Ash__SOURCE_DIRECTORY/$Ash__CORE_MODULES_DIRECTORY/$Logger_PACKAGE/extras/logger.log"
 
 # ===== Vars =====
 Logger_prefix='Logger'
-Logger_has_prefix="$Ash__true"
+Logger_has_prefix="$Ash__TRUE"
 
 #################################################
 # Logs a message
@@ -35,7 +35,7 @@ Logger_log() {
     fi
 
     # Logging
-    if [ "$Logger_has_prefix" = "$Ash__true" ]; then
+    if [ "$Logger_has_prefix" = "$Ash__TRUE" ]; then
         echo $flags "<< $Logger_prefix >>: $message"
     else
         echo $flags "$message"
@@ -163,7 +163,7 @@ Logger__debug() {
 
     # Logging to file
     local err=""
-    if [ "$Logger_has_prefix" = "$Ash__true" ]; then
+    if [ "$Logger_has_prefix" = "$Ash__TRUE" ]; then
         err=$({ echo "<< $Logger_prefix >>: $message" >> "$debug_file"; } 2>&1)
     else
         err=$({ echo "$message" >> "$debug_file"; } 2>&1)
@@ -192,12 +192,12 @@ Logger__set_prefix() {
 # Enables the prefix before all logs
 #################################################
 Logger__enable_prefix() {
-    Logger_has_prefix="$Ash__true"
+    Logger_has_prefix="$Ash__TRUE"
 }
 
 #################################################
 # Disables the prefix before all logs
 #################################################
 Logger__disable_prefix() {
-    Logger_has_prefix="$Ash__false"
+    Logger_has_prefix="$Ash__FALSE"
 }
